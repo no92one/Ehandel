@@ -1,4 +1,5 @@
 import program
+from cart import Cart
 
 
 class User:
@@ -11,9 +12,19 @@ class User:
             if answer.lower() == "b":
                 run = False
             elif answer.isdigit():
-                answer = int(answer) - 1
-                if 0 >= answer < len(program.products.list):
-                    print(f"{program.products.list[answer]}")
+                index = int(answer) - 1
+                if 0 <= index < len(program.products.list):
+                    amount = input(f"Hur många {program.products.list[index].name} vill du ha?"
+                                   f"\nIn stock - {program.products.list[index].stock}"
+                                   f"\n-> ").strip()
+                    if amount.isdigit():
+                        amount = int(amount)
+                        if 1 <= amount <= program.products.list[index].stock:
+                            program.products.list[index].stock -= amount
+                            self.cart.add(program.products.list[index], amount)
+
+
+
 
 
 
@@ -35,7 +46,7 @@ class User:
                     self.shop_products()
 
                 case "2":
-                    print("Varukorg")
+                    print(self.cart.print_list())
 
                 case "3":
                     print("Min beställningar")
@@ -53,4 +64,5 @@ class User:
                     print(f"Du skrev in '{answer}'\nDu måste välja 1, 2, eller Q!")
 
     def __init__(self):
+        self.cart = Cart()
         self.start_menu()
