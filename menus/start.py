@@ -13,7 +13,8 @@ class Start:
 
             match answer.lower():
                 case "1":
-                    print("Lista av products")
+                    program.products.print_list()
+                    print("\nOBS! Om du vill handla produkter måste du logga in!")
 
                 case "2":
                     login = Login()

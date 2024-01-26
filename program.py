@@ -1,9 +1,11 @@
-from menus.start import Start
-from menus.user import User
-from menus.admin import Admin
+from menus.start import Start as StartMenu
+from menus.user import User as UserMenu
+from menus.admin import Admin as AdminMenu
 from entities.user import User
+from product_list import ProductList
 
-user = User(-1, "x", "x", "x")
+user = User(-1, "x", "x", "USER")
+products = ProductList()
 
 def logout():
     global user
@@ -18,8 +20,8 @@ class Program:
         while user != False:
             print(user.role)
             if user.role == "x":
-                Start()
+                StartMenu()
             elif user.role == "ADMIN":
-                Admin()
+                AdminMenu()
             elif user.role == "USER":
-                User()
+                UserMenu()

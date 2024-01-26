@@ -23,3 +23,8 @@ def create_user(username, password):
     cursor.execute("INSERT INTO users (username, password, role) "
                    f"VALUES ('{username}', '{password}', 'USER')")
     database.commit()
+
+def get_all_products():
+    cursor.execute(f"SELECT * FROM products")
+    result = cursor.fetchall()
+    return result
