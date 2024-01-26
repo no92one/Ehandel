@@ -1,4 +1,3 @@
-from menu import Menu
+from program import Program
 
-new_menu = Menu()
-new_menu.start_menu()
+new_program = Program()

@@ -1,19 +1,65 @@
 from database import login_query
 from user import User
+import program
+
 
 
 class Menu:
 
     def __init__(self):
-        self.user = ""
+        pass
 
     def start_menu_admin(self):
-        pass
+        run = True
+        while run:
+            answer = input(f"\n{program.user.role} MENY - {program.user.username}\n"
+                           "\n1. Lista av products"
+                           "\n2. Logga ut"
+                           "\nQ. Avsluta programmet"
+                           "\n\n-> ").strip()
+
+            match answer.lower():
+                case "1":
+                    print("Lista av products")
+
+                case "2":
+                    self.logout()
+                    run = False
+
+                case "q":
+                    self.close_program()
+                    run = False
+                    print("Programet avslutas!")
+
+                case _:
+                    print(f"Du skrev in '{answer}'\nDu måste välja 1, 2, eller Q!")
 
     def start_menu_user(self):
-        pass
-    def start_menu(self):
+        run = True
+        while run:
+            answer = input(f"\n{program.user.role} MENY - {program.user.username}\n"
+                           "\n1. Lista av products"
+                           "\n2. Logga ut"
+                           "\nQ. Avsluta programmet"
+                           "\n\n-> ").strip()
 
+            match answer.lower():
+                case "1":
+                    print("Lista av products")
+
+                case "2":
+                    self.logout()
+                    run = False
+
+                case "q":
+                    self.close_program()
+                    run = False
+                    print("Programet avslutas!")
+
+                case _:
+                    print(f"Du skrev in '{answer}'\nDu måste välja 1, 2, eller Q!")
+
+    def start_menu(self):
         run = True
         while run:
             answer = input("\nStart meny\n"
@@ -30,6 +76,7 @@ class Menu:
                     run = self.login_menu()
 
                 case "q":
+                    self.close_program()
                     run = False
                     print("Programet avslutas!")
 
@@ -89,11 +136,10 @@ class Menu:
                     elif len(password) == 0:
                         print("Du måste ange ett lösenord!")
                     else:
-                        user = login_query(username, password)
-                        if len(user) == 1:
+                        db_user = login_query(username, password)
+                        if len(db_user) == 1:
                             print("Du har loggat in!")
-                            print(user[0])
-                            self.user = User(user[0]["id"], user[0]["username"], user[0]["password"], user[0]["role"])
+                            program.user = User(db_user[0]["id"], db_user[0]["username"], db_user[0]["password"], db_user[0]["role"])
                             run = False
                             run_head_loop = False
                         else:
@@ -106,3 +152,9 @@ class Menu:
                     print(f"Du skrev in '{answer}'\nDu måste välja 1, 2, eller B!")
 
         return run_head_loop
+
+    def logout(self):
+        program.user = User(-1, "x", "x", "x")
+
+    def close_program(self):
+        program.user = False
