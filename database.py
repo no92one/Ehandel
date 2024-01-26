@@ -14,5 +14,12 @@ def login_query(username, password):
     result = cursor.fetchall()
     return result
 
+def check_if_user_exist(username):
+    cursor.execute(f"SELECT * FROM users where username = '{username}'")
+    result = cursor.fetchall()
+    return result
 
-
+def create_user(username, password):
+    cursor.execute("INSERT INTO users (username, password, role) "
+                   f"VALUES ('{username}', '{password}', 'USER')")
+    database.commit()

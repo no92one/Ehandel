@@ -1,5 +1,5 @@
-from menu import Menu
-from user import User
+from menus.menu import Menu
+from entities.user import User
 
 user = User(-1, "x", "x", "x")
 
