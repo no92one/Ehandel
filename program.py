@@ -1,17 +1,25 @@
-from menus.menu import Menu
+from menus.start import Start
+from menus.user import User
+from menus.admin import Admin
 from entities.user import User
 
 user = User(-1, "x", "x", "x")
 
+def logout():
+    global user
+    user = User(-1, "x", "x", "x")
+
+def close_program():
+    global user
+    user = False
+
 class Program:
     def __init__(self):
-        menu = Menu()
-
         while user != False:
             print(user.role)
             if user.role == "x":
-                menu.start_menu()
+                Start()
             elif user.role == "ADMIN":
-                menu.start_menu_admin()
+                Admin()
             elif user.role == "USER":
-                menu.start_menu_user()
+                User()
