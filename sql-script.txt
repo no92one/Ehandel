@@ -1,0 +1,25 @@
+create table products
+(
+    id    int auto_increment
+        primary key,
+    name  varchar(255) null,
+    price double       null,
+    stock int          null
+);
+
+create table roles
+(
+    role varchar(255) not null
+        primary key
+);
+
+create table users
+(
+    id       int auto_increment
+        primary key,
+    username varchar(255) not null,
+    password varchar(255) not null,
+    role     varchar(255) not null,
+    constraint users_roles_role_fk
+        foreign key (role) references roles (role)
+);

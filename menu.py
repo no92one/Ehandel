@@ -2,8 +2,6 @@ from database import login_query
 from user import User
 import program
 
-
-
 class Menu:
 
     def __init__(self):
@@ -130,7 +128,6 @@ class Menu:
                     password = input("Lösenord -> ").strip()
 
                 case "3":
-
                     if len(username) == 0:
                         print("Du måste ange ett användarman!")
                     elif len(password) == 0:
